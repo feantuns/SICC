@@ -1,0 +1,24 @@
+{
+  "name": "package.json",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  },
+  "version": "1.0.0",
+  "description": "Projeto SICCBrasil",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felipe Antunes",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^4.4.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  }
+}

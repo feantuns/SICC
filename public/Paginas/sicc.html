@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
+  <title>SICC</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+  <!-- Normalize CSS -->
+  <link rel="stylesheet" href="../css/normalize.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../css/font-awesome.min.css">
+
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,300,700,600,500' rel='stylesheet' type='text/css'>
+
+  <!-- MDL -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-indigo.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  <!-- CSS Customizados -->
+  <link rel="stylesheet" href="../css/sicc.css">
+  <link rel="shortcut icon" href="../img/logo-sicc.png" style="width: 32px; height: 32px;" type="image/x-png">
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+
+  <!-- Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqevNq6GsrD1hdfhBIHSZqxgAEokWitT4"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+
+  <!--Load the AJAX API - GRAFICOS-->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- ScrollReveal -->
+  <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+
+  <!-- Função para formatar campos telefone e celular formularios -->
+  <script>
+    function mascara(t, mask){
+      var i = t.value.length;
+      var saida = mask.substring(1,0);
+      var texto = mask.substring(i)
+      if (texto.substring(0,1) != saida){
+        t.value += texto.substring(0,1);
+      }
+    }
+  </script>
+
+  <!-- CODIGO DE ACOMPANHAMENTO ANALYTICS -->
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-106217423-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- <div style="clear:both"><a href="http://blog.sagipl.com/web-design-trends/"><img src="http://blog.sagipl.com/wp-content/uploads/2015/07/Top_Web_Design_Trends_in_2017.jpg" title="5 Web Design Trends in 2017" alt="Web Design Trends 2017" width="790" height="2100" border="0" /></a></div><div>Courtesy of: <a href="https://www.sagipl.com/website-design/">SAG IPL</a></div> -->
+
+  <!-- PAGINA LOADING -->
+  <div id="loader">
+    <div class="loader-content" id="">
+      <img src="../img/logo-sicc-pp.png" class="img-fuid" alt="">
+      <div id="p2" style="width: 150px; margin-top: 3rem;" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <dialog class="mdl-dialog" id="container-login">
+    <a id="saiTrocaSenha" class="display-none" href="#"><i class="fa fa-3x fa-arrow-circle-left" style="color: #757575" aria-hidden="true"></i></a>
+    <a href="../index.html" id="linkSaiLogin"><i class="fa fa-3x fa-arrow-circle-left" id="icon-sai-login" style="color: #757575" aria-hidden="true"></i></a>
+    <img src="../img/logo-sicc-pp.png" class="mx-auto d-block logo" alt="Logo SICC">
+    <div class="mdl-dialog__content" style="padding-top: 0;" id="conteudo-login">
+
+      <!-- CONTAINER TROCA SENHA -->
+
+      <div id="container-troca-senha" class="display-none">
+        <h4 class="text-center"><strong>Redefinição de senha</strong></h4>
+        <p style="text-align: center;">Informe seu email para que possamos entrar em contato</p>
+        <label for="txtEmailSenha" class="sr-only">Email</label>
+        <input type="email" id="txtEmailSenha" class="form-control" placeholder="myemail@exemplo.com" required>
+      </div>
+
+      <!-- CONTAINER PADRÃO -->
+      <div id="container-normal">
+        <h4 class="text-center">SICC</h4>
+        <p id="emailError" class="display-none text-center" style="color: red"><strong>Email ou senha inválidos. Corrija e tente novamente</strong></p>
+
+        <div class="mdl-textfield campo-login mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="email" id="txtEmail">
+          <label class="mdl-textfield__label" for="txtEmail">Email</label>
+        </div>
+
+        <div class="mdl-textfield campo-login mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="password" id="txtPassword">
+          <label class="mdl-textfield__label" for="txtPassword">Senha</label>
+        </div>
+
+      </div>
+    </div>
+    <div class="mdl-dialog__actions">
+      <button id="btnTrocaSenha" type="button" class="mdl-button display-none">Enviar</button>
+      <button id="btnLogin" type="button" class="mdl-button">Entrar</button>
+      <button id="linkTrocaSenha" type="button" class="mdl-button close">Esqueci a senha</button>
+    </div>
+  </dialog>
+
+  <!-- CABECALHO -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="header">
+    <header class="mdl-layout__header cabecalho" id="cabecalho">
+      <button id="btnDrawer" aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button" style="display: flex;
+            align-items: center;
+            justify-content: center;">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="mdl-layout-icon"></div>
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout__title">SICC
+          <span class="page-title-span"> | </span>
+          <span class="page-title-span" id="titulo"></span>
+        </span>
+
+        <a class="mdl-navigation__link smooth display-none-important" href="#topo">
+          <strong>Topo</strong>
+        </a>
+      </div>
+      <!-- /ROW HEADER -->
+    </header>
+    <!-- /HEADER -->
+
+    <!-- DRAWER -->
+    <div class="mdl-layout__drawer">
+
+      <!-- DRAWER HEADER -->
+      <div class="drawer_header">
+        <div class="row container-info" id="container-info">
+          <div class="inicio-t">
+            <i class="fa fa-5x fa-key icone-header" aria-hidden="true"></i>
+            <h4 id="user-apt" class="text-center" style="border-bottom: solid; width: 50px; margin-left: 10px;"></h4>
+          </div>
+          <div class="final-t">
+            <i class="fa fa-5x fa-building icone-header" aria-hidden="true"></i>
+            <h4 id="user-blc" class="text-center" style="border-bottom: solid; width: 50px; margin-left: 3px;"></h4>
+          </div>
+        </div>
+        <h4 id="user-name" class="text-center mx-auto"></h4>
+        <div class="img_perfil">
+          <a href="#" class="troca-imagem">
+            <div class="container-img">
+              <div id="imagem-perfil-drawer" class="rounded-circle display-none"></div>
+              <img id="sem-imagem-perfil-drawer" class="rounded-circle display-none" src="../img/user.png" style="width: 100px !important; height: 100px !important;" alt="Imagem Perfil drawer">
+              <div class="overlay">
+                <div class="text">Alterar</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <h4 id="tipo-user" class="display-none text-center mx-auto"></h4>
+      </div>
+      <!-- /DRAWER HEADER -->
+
+      <!-- NAV LINKS -->
+      <nav class="mdl-navigation menu-links" id="navLinks">
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonNoticia">
+            <i class="material-icons">public</i>Notícias</button>
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonHistorico" style="display: none;">
+            <i class="material-icons">history</i>Histórico</button>
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonAcompanhe" style="display: none;">
+            <i class="material-icons">location_on</i>Acompanhe</button>        
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonMural">
+            <i class="material-icons">photo_library</i>Mural</button>
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonEventos">
+            <i class="material-icons">event</i>Eventos</button>
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonEstatisticas">
+            <i class="material-icons">timeline</i>Estatísticas</button>
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonMensagens">
+          <i class="material-icons">mail</i>Mensagens</button>
+        <!-- <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonDenuncias" style="display: none">
+          <i class="material-icons">feedback</i>Denúncias</button> -->
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonPerfil">
+            <i class="material-icons">person</i>Perfil</button>
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonCondominio">
+            <i class="material-icons">import_contacts</i>Condomínio</button>
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonSobre">
+            <i class="material-icons">info</i>Sobre</button>
+        <button class="mdl-navigation__link drawer-topo" href="#topo" id="buttonLogout" style="margin-bottom: 1.5rem">
+          <i class="material-icons">exit_to_app</i>Sair</button>
+      </nav>
+      <!-- NAV LINKS -->
+    </div>
+    <!-- /DRAWER -->
+    <main class="mdl-layout__content">
+      <!-- CONTEÚDO -->
+
+      <div id="topo"></div>
+
+      <!-- CONTAINER FLUID -->
+      <div id="containerFluid">
+
+        <!-- CAROUSEL NOTICIAS -->
+        <section id="carousel" class="display-none">
+          <div id="carousel-noticias" class="carousel slide" data-pause="false" data-ride="carousel" data-interval="7000">
+
+            <div id="carousel-inner" class="carousel-inner" role="listbox">
+
+              <div class="carousel-item active">
+
+                <div class="bem-vindo-slide">
+                  <div class="container animated slideInDown" style="bottom: 6rem;">
+                    <div class="row">
+                      <img src="../img/logo-sicc-p.png" class="mx-auto d-block img-fuid" alt="">
+                    </div>
+                    <div class="row">
+                      <h1 class="col h1-slide text-center" style="margin: 0">Bem Vind<span id="terminacaoBemVindo"></span></h1>
+                    </div>
+                    <div class="row">
+                      <h1 class="col h1-slide text-center" style="margin-top: 1rem; margin: 0"><span id="nomeUsuarioSlide"></span></h1>
+                    </div>
+                  </div>
+                  <a href="#" id="buttonSobreSlide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h3>Seja Bem Vind<span id="terminacaoBemVindo2"></span> ao S.I.C.C.</h3>
+                      <p>Aproveite o site que fizemos a você e clique aqui para saber mais sobre o projeto</p>
+                    </div>
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- CONTROLS -->
+            <button class="carousel-control-prev" href="#carousel-noticias" role="button" data-slide="prev">
+              <i class="fa fa-3x fa-arrow-left" aria-hidden="true"></i>
+              <span class="sr-only">Previous</span>
+            </button>
+            <button class="carousel-control-next" href="#carousel-noticias" role="button" data-slide="next">
+              <i class="fa fa-3x fa-arrow-right" aria-hidden="true"></i>
+              <span class="sr-only">Next</span>
+            </button>
+          </div>
+        </section>
+        <!-- /CAROUSEL NOTICIAS -->
+
+      </div>
+      <!-- /CONTAINER FLUID -->
+
+      <!-- CONTAINER GLOBAL -->
+      <div class="container" id="container">
+
+        <!-- CONTAINER RECEBE NOTICIAS -->
+        <section id="container-aleatorio">
+          <h3 id="texto-noticia" class="titulo-sessao mx-auto"> Confira as últimas notícias de seu condomínio </h3>
+          <div id="container-noticias">
+
+            <!-- NOTICIAS -->
+
+          </div>
+          <div id="container-noticia-full">
+
+            <!-- NOTICIAS COMPLETAS -->
+
+          </div>
+        </section>
+        <!-- /CONTAINER RECEBE NOTICIAS -->
+
+        <!-- CONTAINER RECEBE PUBLICACOES MURAL -->
+        <section id="container-aleatorio-2" class="display-none">
+          <div id="container-mural">
+            <h3 class="titulo-sessao mx-auto d-block"> Esse é o Mural <br> Veja e Publique aqui </h3>
+
+            <!-- POSTS -->
+
+          </div>
+          <div id="container-novo-post">
+
+            <!-- POSTS -->
+
+          </div>
+        </section>
+        <!-- /CONTAINER RECEBE PUBLICACOES MURAL -->
+
+        <!-- EVENTOS -->
+        <section id="section-eventos" class="display-none">
+          <h3 id="textoEventos" class="titulo-sessao mx-auto d-block"> Aqui estão seus Eventos </h3>
+          <div id="container-eventos-publicos">
+
+            <!-- EVENTOS PUBLICOS AQUI -->
+
+          </div>
+
+          <hr class="my-4">
+
+          <div class="row d-flex justify-content-center">
+
+            <div id="container-eventos">
+
+              <!-- EVENTOS AQUI -->
+
+            </div>
+
+            <div id="container-eventos-full" class="display-none">
+
+              <!-- EVENTOS FULL AQUI * FUNCIONARIOS -->
+
+            </div>
+          </div>    
+        </section>
+        <!-- /EVENTOS -->
+
+        <!-- Button Envia Notificacao -->
+        <div class="fixed-bottom col-3" style="margin-left: auto;">
+          <button id="show-dialog-notificacao" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect btn-mostra-lista display-none">
+            <i class="material-icons">send</i>
+          </button>
+        </div>
+
+        <!-- BUTTON MOSTRA OPÇÕES -->
+        <div class="btn-group dropup fixed-bottom col-3 div-btn-mostra-lista" style="margin-left: auto;">
+          <button id="mostra-lista" class="mdl-button mdl-button--fab mdl-button--colored btn-mostra-lista" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons" class="icone-mostra-lista" style="font-weight: bold; text-align: center;">add</i>
+          </button>
+          <div class="dropdown-menu" style="margin-left: 20%;">
+            <button class="dropdown-item links-button" id="show-dialog-cadastra-funcionario">Novo Funcionário</button>
+            <button class="dropdown-item links-button" id="show-dialog-evento">Novo Evento</button>
+            <button class="dropdown-item links-button" id="show-dialog-nova-noticia">Nova Noticia</button>
+            <button class="dropdown-item links-button" id="show-dialog-publicacao">Nova Publicação</button>
+          </div>
+        </div>
+
+        <!-- SNACKBAR -->
+        <div id="toast-informacao" style="z-index: 99999;" class="mdl-js-snackbar mdl-snackbar">
+          <div class="mdl-snackbar__text"></div>
+          <button class="mdl-snackbar__action" type="button"></button>
+        </div>
+
+        <!-- HISTORICO -->
+        <section class="display-none" id="historico-msgs">
+          <h3 class="titulo-sessao mx-auto d-block"> Aqui está um histórico das últimas notificações enviadas, veja e confira! </h3>
+          <div class="container">
+            <div class="row" style="display: flex; justify-content: center;">
+              <button id="mostra-aguardando" type="button" class="mdl-chip notificacoes-chips">
+                <span class="mdl-chip__text">
+                  <strong>Aguardando</strong>
+                </span>
+              </button>
+
+              <button id="mostra-retiradas" type="button" class="mdl-chip notificacoes-chips">
+                <span class="mdl-chip__text">
+                  <strong>Retiradas</strong>
+                </span>
+              </button>
+
+              <button id="mostra-enganos" type="button" class="mdl-chip notificacoes-chips">
+                <span class="mdl-chip__text">
+                  <strong>Enganos</strong>
+                </span>
+              </button>
+
+              <button id="toggle-pesquisa-registro" type="button" class="mdl-chip notificacoes-chips" data-toggle="collapse" data-target="#collapsePesquisa">
+                <span class="mdl-chip__text">
+                  <strong>Pesquisar</strong>
+                </span>
+              </button>  
+            </div>
+          </div>
+          <div class="justify-content-center d-flex">
+            <div class="collapse col-lg-8" id="collapsePesquisa">
+              <div class="card card-body collapse-pesquisa">
+          
+                <form>
+                  <div class="container row-card-collapse">
+
+                    <h4 class="text-center">Pesquisar por:</h4>
+
+                    <div class="row">
+
+                      <div class="form-group col">
+                        <label for="pesquisaNome">Morador</label>
+                        <div class="row padding-row-card">
+                          <input type="text" class="form-control col camposMorador" id="pesquisaNome" placeholder="Nome Completo">
+
+                          <input style="margin-left: 10px" type="number" class="form-control col-3 camposMorador" id="pesquisaBloco" placeholder="Bloco">
+                        </div>  
+                      </div>
+
+                      <div class="form-group col">
+                        <label for="exampleInputEmail1">Data de Envio</label>
+                        <div class="row padding-row-card">
+                          <input id="pesquisaDia" type="number" class="form-control col camposData" placeholder="DD" min="1" max="31" maxlength="2">
+                          <input id="pesquisaMes" style="margin: 0 10px" type="number" class="form-control col camposData" min="1" max="12" placeholder="MM" maxlength="2">
+                          <input id="pesquisaAno" type="number" class="form-control col camposData" placeholder="AAAA" maxlength="4">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                      <button id="btn-pesquisa-registro" class="btn-pesquisa-registro">
+                        <i class="fa fa-search fa-2x" aria-hidden="true"></i>
+                      </button>
+                    </div>
+
+                    <div id="resultadoPesquisa" class="row justify-content-center">
+                      <!-- Resultados -->
+                    </div>
+                    
+                    <div class="row justify-content-center">
+                      <button id="btn-close-collapse" data-toggle="collapse" class="display-none btn-pesquisa-registro" data-target="#collapsePesquisa">
+                        <i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i>
+                      </button>
+                    </div>
+
+                  </div>  
+                </form>
+              </div>
+            </div>
+          </div>  
+          <div id="notificacoes-aguardando">
+
+              <!-- NOTIFICACOES AGUARDANDO -->
+
+          </div>
+
+          <div id="notificacoes-retiradas" class="display-none">
+
+              <!-- NOTIFICACOES RETIRADAS -->
+
+          </div>
+
+          <div id="notificacoes-engano" class="display-none">
+
+              <!-- NOTIFICACOES ENGANO -->
+
+          </div>
+        </section>
+        <!-- /HISTORICO -->
+
+        <!-- ACOMPANHE -->
+        <section class="display-none" id="container-mapa">
+          <h3 id="textoAcompanhe" class="titulo-sessao mx-auto d-block"> Acompanhe os moradores que estão próximos do condomínio! </h3>
+          <div style="margin-top: 3rem; width: 100%;height: 600px;" id="mapa"></div>
+        </section>
+
+        <!-- INFORMACOES SOBRE O CONDOMINIO -->
+        <section id="container-condominio" class="display-none">
+          <div class="jumbotron apresentacao" id="informacoes-condominio">
+            <h1 class="display-3 text-center" style="font-size: 4rem;">Mais Informações</h1>
+            <img class="mx-auto d-block img-fluid" style="margin: 20px 0;" src="../img/logo-g.png" alt="Logo Topazio Ville">
+            <p class=" text-center">Conheça quem é o sídico, os subsíndicos e ainda leia a regulamentação de seu condomínio</p>
+            <hr class="my-4">
+            <p class="negrito">Síndico:</p>
+            <p>Oberdan Siqueira <br> sindico@topazioville.com
+            </p>
+            <hr class="my-4">
+            <p class="negrito">Subsíndicos:</p>
+            <div class="row">
+              <p class="col">
+                BLOCO 01 <br> Robinson Costa Franco <br> bloco01@topazioville.com
+              </p>
+              <p class="col">
+                BLOCO 02 <br> Bruno Cavedini <br> bloco02@topazioville.com
+              </p>
+              <p class="col">
+                BLOCO 03 <br> Lidiane Mendes <br> bloco03@topazioville.com
+              </p>
+            </div>
+            <div class="row">
+              <p class="col">
+                BLOCO 04 <br> Marcelo Rocha <br> bloco04@topazioville.com
+              </p>
+              <p class="col">
+                BLOCO 05 <br> Marcelo Padula <br> bloco05@topazioville.com
+              </p>
+              <p class="col">
+                BLOCO 06 <br> Ligia Prandi <br> bloco06@topazioville.com
+              </p>
+            </div>
+            <div class="row">
+              <p class="col">
+                BLOCO 07 <br> Tiago Cruz <br> bloco07@topazioville.com
+              </p>
+              <p class="col">
+                BLOCO 08 <br> Adriano Carnio <br> bloco08@topazioville.com
+              </p>
+              <p class="col">
+                BLOCO 09 <br> Rogério Balarin <br> bloco09@topazioville.com
+              </p>
+            </div>
+            <div class="row">
+              <p class="col">
+                BLOCO 10 <br> Ricardo Junior de Carvalho <br> bloco10@topazioville.com
+              </p>
+            </div>
+
+            <hr class="my-4">
+            <p class="negrito">Conselho Fiscal:</p>
+            <div class="row">
+              <p class="col">
+                Fernando de Gonçalves <br> fiscal01@topazioville.com
+              </p>
+              <p class="col">
+                Rodrigo Constança <br> fiscal02@topazioville.com
+              </p>
+              <p class="col">
+                Kátia Bueno <br> fiscal03@topazioville.com
+              </p>
+            </div>
+            <hr class="my-4">
+
+            <p class="negrito">
+              <button id="buttonShowRules" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btnCondominio mx-auto d-block drawer-topo" href="#topo" role="button">Leia as Regras</button>
+            </p>
+          </div>
+           <div class="display-none" id="rules">
+
+            <h3 class="titulo-sessao mx-auto d-block"> Leia o Regimento Interno de seu Condomínio! </h3>
+
+            <iframe src="https://drive.google.com/file/d/0B78Wn_gNpVyXS1VoMVFFbHU0V1E/preview" width="100%" height="500px" class="mx-auto regimento"></iframe>
+          </div>
+          <button id="buttonVoltarInfo" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btnCondominio mx-auto display-none drawer-topo" href="#topo" role="button">Voltar</button>
+        </section>
+
+        <!-- SOBRE -->
+        <section id="tela-sobre" class="display-none">
+          <div class="jumbotron apresentacao">
+
+            <h1 class="display-3 text-center" style="font-size: 4rem;">Sobre nós</h1>
+            <img id="logoSobre" src="../img/logo-sicc-p.png" title="Não Clique!" class="mx-auto d-block" style="margin-bottom: 2rem;" alt="Logo SICC">
+            <p class="text-center">O projeto S.I.C.C pretende viabilizar uma maior interação entre os síndicos, moradores e porteiros do condomínio, de forma fluente e funcional, propondo a todos funções úteis e práticas. Para que dessa forma o dia a dia dos moradores de condomínios
+              seja mais favorável, uma vez que ao utilizar nosso sistema o morador passa a realizar muitas das funções que antes dependiam do contato direto com as entidades responsáveis pelo condomínio sem sair de sua casa, apenas utiilizando nosso aplicativo
+              ou site. Por outro lado, os funcionários também são favorecidos, já que agora notificar moradores é muito mais fácil e conveniente. Assim como os síndicos se benificiam dado que podem administrar e avisar novidades através do cadastro de
+              notícias a qualquer momento. Logo, esperamos ajudar a vida como um todo nesse ambiente condômino.</p>
+            <hr class="my-4">
+            <p class="negrito">Desenvolvedores</p>
+            <hr class="my-4">
+            <p>Felipe Antunes</p>
+            <p>Matheus Rodrigues</p>
+            <p>Pedro Henrique</p>
+            <p>Rafaela Zanezi</p>
+            <hr class="my-4">
+            <p class="negrito">Email para contato</p>
+            <hr class="my-4">
+            <p>siccbrasil@gmail.com</p>
+
+          </div>
+        </section>
+        <!-- /SOBRE -->
+
+        <!-- ESTATISTICAS -->
+        <section id="container-estatisticas" class="display-none">
+
+          <h3 class="titulo-sessao mx-auto d-block" style="margin-bottom: 3rem;">
+            Aqui estão algumas informações úteis
+          </h3>
+
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="dados col-md-3">
+                <div class="container">
+                  <div class="row">
+                   <h6 class="text-center">Posts</h6>                
+                  </div>
+                  <div class="row">
+                    <div id="est-posts" class="mx-auto container-dados" tabindex="0" data-toggle="popover" title="Publicações" data-content="Aqui está o número de publicações no mural deste mês" data-placement="top"></div>  
+                  </div> 
+                </div> 
+              </div>
+              <div class="dados col-md-3">
+                <div class="container">
+                  <div class="row">
+                    <h6 class="text-center">Noticias</h6>                
+                  </div>
+                  <div class="row">
+                    <div id="est-noticias" class="mx-auto container-dados" tabindex="0" data-toggle="popover" title="Notícias" data-content="Aqui está o número de notícias que você publicou ao decorrer do mês" data-placement="bottom"></div> 
+                  </div> 
+                </div> 
+              </div>
+              <div class="dados col-md-3">
+                <div class="container">
+                  <div class="row">
+                    <h6 class="text-center">Eventos</h6>
+                  </div>
+                  <div class="row">
+                    <div id="est-eventos" class="mx-auto container-dados" tabindex="0" data-toggle="popover" title="Eventos" data-content="Estes é o número de eventos marcados nesse mês" data-placement="top"></div> 
+                  </div>
+                </div>  
+              </div>
+              <div class="dados col-md-3">
+                <div class="container">
+                  <div class="row">
+                    <h6 class="text-center">Notificações</h6>
+                  </div>
+                  <div class="row">
+                    <div id="est-notificacoes" class="mx-auto container-dados" tabindex="0" data-toggle="popover" title="Notificações" data-content="Este é o número de notificações enviadas da portaria para moradores" data-placement="right"></div> 
+                  </div>
+                </div>   
+              </div>
+          </div>
+        </section>
+
+        <!-- PERFIL -->
+        <section class="display-none" id="pagina-perfil">
+
+          <h3 id="textoEventos" class="titulo-sessao mx-auto d-block">
+              Veja todas as suas informações em sua página de Perfil
+            </h3>
+
+          <div class="container-fluid">
+
+            <div class="row d-flex justify-content-center">
+
+              <div class="row col-md-8 d-flex flex-row justify-content-start">
+
+                <div role="main" class="col-md-8">
+                  <div class="col mr-auto container-perfil">
+                    <div>
+                      <button class="troca-imagem mx-auto d-block">
+                        <div class="container-img-g">
+                          <div id="imagem-perfil-pagina" class="rounded-circle display-none"></div>
+                          <img id="sem-imagem-perfil-pagina" class="rounded-circle display-none" src="../img/user.png" style="width: 150px !important; height: 150px !important;" alt="">
+                          <div class="overlay-g">
+                            <div class="text">Alterar</div>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                    <span class="text-center texto-perfil" id="nome-usuario" style="margin-top: 3rem;"></span>
+                    <hr class="my-4">
+                    <span class="text-center texto-perfil" id="tipo-usuario-perfil"></span>
+                    <hr class="my-4 residencial">
+                    <div class="row" style="display: flex; justify-content: center">
+                      <span class="text-center texto-perfil residencial" id="bloco-usuario"></span>
+                      <span class="text-center texto-perfil residencial"> | </span>
+                      <span class="text-center texto-perfil" id="apt-usuario"></span>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row" style="display: flex; justify-content: center">
+                      <span class="text-center texto-perfil"> Tel: </span>
+                      <span class="text-center texto-perfil" id="tel-usuario"></span>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row" style="display: flex; justify-content: center; margin-bottom: 2rem;">
+                      <span class="text-center texto-perfil"> Cel: </span>
+                      <span class="text-center texto-perfil" id="cel-usuario"></span>
+                    </div>
+                    <button id="show-dialog-senha" class="d-block mx-auto mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                        Senha
+                      </button>
+                    <div class="mdl-tooltip" data-mdl-for="show-dialog-senha">
+                      Altere sua senha <strong>aqui</strong>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+              <!-- /ROW -->
+
+              <div id="ultimo-evento-marcado" class="row col-md-4 d-flex flex-row justify-content-end">
+
+                <aside role="complementary" class="col" style="width: auto;">
+                  <div class="container-perfil-aside">
+                    <span class="text-center texto-perfil" id="status-eventos-perfil"></span>
+                    <div id="container-ultimo-evento"></div>
+                  </div>
+                </aside>
+
+              </div>
+            </div>
+
+
+          </div>
+          <!-- /CONTAINER -->
+        </section>
+        <!-- /PERFIL -->
+
+        <!-- MSGS MURAL -->
+        <section class="display-none" id="pagina-msgs-mural">
+          <h3 class="titulo-sessao mx-auto d-block"> Aqui estão suas Mensagens </h3>
+
+          <div id="container-msgs-mural">
+
+            <!-- Msgs Aqui -->
+
+          </div>
+
+        </section>
+        <!-- /MSGS MURAL -->
+
+        <!-- DENUNCIAS MURAL -->
+        <section class="display-none" id="pagina-denuncias-mural">
+          <h3 class="titulo-sessao mx-auto d-block"> Confira as publicações denunciadas por moradores </h3>
+
+          <div id="container-denuncias-mural">
+
+            <!-- Msgs Aqui -->
+
+          </div>
+
+        </section>
+        <!-- /DENUNCIAS MURAL -->
+
+        <!-- DIV TEXTO FIM DA LINHA -->
+        <div class="d-flex justify-content-center">
+            <span class="text-center mx-auto" id="fim-da-linha"></span>
+
+            <nav aria-label="..." class="mx-auto pagination-nav display-none">
+              <ul class="pagination pagination-lg">
+                <li id="btn-inicio" class="page-item btn-inicio-historico"></li>
+                <li id="btn-anterior" class="page-item disabled"></li>                
+                <li id="btn-proximo" class="page-item"></li>
+              </ul>
+            </nav>
+
+        </div>
+
+      </div>
+        
+      <!-- FOOTER -->
+      <footer id="footer">
+        <div class="footer">
+          <div class="container">
+            <div class="row">            
+              <a class="mx-auto d-block link-footer" href="https://www.siccbrasil.com/" target="_blank">
+                <img src="../img/logo-sicc-pp.png" width="130" height="130" class="mx-auto d-block" alt="Logo SICC">
+              </a>
+            </div>
+            <div class="row">
+              <h4 class="mx-auto d-block texto-footer">A versatilidade ao seu dispor!</h4>
+            </div>
+            <div class="row d-flex justify-content-center">
+
+              <div class="d-flex justify-content-center">
+                <a class="link-footer" href="https://www.facebook.com/SICCBrasil/" target="_blank">
+                  <i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i>
+                </a>
+                <a class="link-footer" href="https://www.instagram.com/sicc.brasil/?hl=pt-br" target="_blank">
+                  <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+                </a>
+                <a class="link-footer" href="https://twitter.com/SICC_Brasil" target="_blank">
+                  <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- /FOOTER -->
+
+    </main>
+  </div>
+  <!-- /CONTEUDO -->
+
+  <!-- DIALOG NOTIFICACAO -->
+  <dialog class="mdl-dialog" id="dialog-notificacao">
+    <h5 class="mdl-dialog__title titulo">Enviar Notificação</h5>
+    <div class="mdl-dialog__content">
+
+      <!-- PAGINA INICIAL -->
+      <fieldset id="campos-inicio">
+        <legend style="margin-bottom: 2.5rem;">
+          <strong>Informe os dados</strong>
+        </legend>
+        <p class="display-none" id="blocoAptErrado" style="color: red;">Bloco ou apartamento inválidos!</p>
+        <div class="row">
+
+          <div class="col-6">
+            <label class="col-form-label" for="bloco">
+              <strong>Bloco</strong>
+            </label>
+            <input required maxlength="2" min="1" max="10" type="number" class="form-control" id="bloco" placeholder="Ex: 1, 9..">
+          </div>
+
+          <div class="col-6">
+            <label class="col-form-label" for="apt">
+              <strong>Apartamento</strong>
+            </label>
+            <input required type="number" max="30" min="1" class="form-control" id="apt" placeholder="Ex: 43, 21..">
+          </div>
+
+        </div>
+      </fieldset>
+
+
+      <!-- PAGINA SEGUINTE -->
+      <fieldset id="campos-proximo" class="form-group display-none">
+        <legend style="margin-bottom: 10px;"><strong>Selecione o motivo</strong></legend>
+
+        <label class="mdl-radio opcoes-notificacao mdl-js-radio mdl-js-ripple-effect" for="motivo1">
+            <input type="radio" id="motivo1" class="mdl-radio__button" name="motivos" value="motivo1" checked>
+            <span class="mdl-radio__label">Nova encomenda</span>
+        </label>
+
+        <label class="mdl-radio opcoes-notificacao mdl-js-radio mdl-js-ripple-effect" for="motivo2">
+            <input type="radio" id="motivo2" class="mdl-radio__button" name="motivos" value="motivo2">
+            <span class="mdl-radio__label">Nova carta</span>
+        </label>
+
+        <label class="mdl-radio opcoes-notificacao mdl-js-radio mdl-js-ripple-effect" for="motivo3">
+            <input type="radio" id="motivo3" class="mdl-radio__button" name="motivos" value="motivo3">
+            <span class="mdl-radio__label">Nova conta</span>
+        </label>
+
+        <label class="mdl-radio opcoes-notificacao mdl-js-radio mdl-js-ripple-effect ativaCampoVisita" for="motivo4">
+            <input type="radio" id="motivo4" class="mdl-radio__button" name="motivos" value="motivo4">
+            <span class="mdl-radio__label">Nova visita na portaria</span>
+        </label>
+
+        <!-- INPUT NOME VISITA -->
+        <div id="campo-visita" style="display: none; margin-top: 15px;">
+          <label for="visita">
+            <strong>Digite o nome do visitante</strong>
+          </label>
+          <input class="form-control" type="text" id="visita" placeholder="Nome da visita">
+        </div>
+
+        <div style="margin-top: 15px;" class="row">
+          <div class="lista-nomes">
+            <label class="col-form-label" for="moradores">
+              <strong>Selecione o morador</strong>
+            </label>
+            <select class="custom-select" id="moradores">
+                <option selected>Nenhum nome selecionado</option>
+              </select>
+          </div>
+        </div>
+
+        <p id="inputError" style="color: red; font-weight: bold; margin-top: 1rem;">Selecione um morador!</p>
+
+      </fieldset>
+
+
+    </div>
+    <!-- /DIALOG CONTENT -->
+
+    <div class="mdl-dialog__actions">
+      <button id="btnProximo" type="submit" class="mdl-button">Proximo</button>
+      <button id="btnEnviar" type="submit" class="mdl-button display-none">Enviar</button>
+      <button id="cancela" type="submit" class="mdl-button close">Cancela</button>
+    </div>
+  </dialog>
+
+
+  <!-- DIALOG CADASTRAR NOVA NOTICIA -->
+  <dialog class="mdl-dialog formularios" id="dialog-nova-noticia">
+
+    <h5 class="mdl-dialog__title titulo text-center" style="margin-bottom: 1.5rem;">
+      Nova Noticia
+    </h5>
+
+    <div class="mdl-dialog__content">
+
+      <fieldset class="form-group">
+        <legend> Titulo da Noticia </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="titulo-formulario-noticia">
+            Máx: 35 caracteres
+          </label>
+          <input class="mdl-textfield__input" type="text" id="titulo-dialog-noticia">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Subtitulo da Noticia </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="subtitulo">
+            Máx: 140 caracteres
+          </label>
+          <textarea maxlength="140" class="mdl-textfield__input" rows="3" type="text" id="subtitulo-dialog-noticia"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Conteudo da Noticia </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="conteudo">
+            Conteudo
+          </label>
+          <textarea class="mdl-textfield__input" rows="10" type="text" id="conteudo-dialog-noticia"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Imagem </legend>
+        <div>
+          <label id="label-imagem-noticia" class="label-inputs" for='imagem-noticia'>
+            Escolher Imagem
+          </label>
+          <input type="file" name="arq" id="imagem-noticia" value="upload">
+        </div>
+      </fieldset>
+
+      <div id="novaImagemNoticia" class="display-none"></div>
+
+      <p id="sem-texto-noticia" class="display-none" style="color: red;">
+        <strong>É necessário preecher todos os campos!</strong>
+      </p>
+      <p id="sem-imagem-noticia" class="display-none" style="color: red;">
+        <strong>É necessário escolher uma imagem de capa para a noticia!</strong>
+      </p>
+      <p id="arquivoInvalidoNoticia" class="display-none" style="color: red;">
+        <strong>Arquivo Inválido!</strong>
+      </p>
+
+    </div>
+    <!-- /DIALOG CONTENT -->
+
+    <div class="mdl-dialog__actions">
+      <button type="button" id="btnCadastrarNoticia" class="mdl-button">Cadastrar</button>
+      <!-- MDL Spinner Component with Single Color -->
+      <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active display-none loading-upload"></div>
+      <button type="button" class="mdl-button close">Cancelar</button>
+    </div>
+    <!-- /DIALOG ACTIONS -->
+
+  </dialog>
+  <!-- /DIALOG NOVA NOTICIA -->
+
+  <!-- DIALOG NOVA PUBLICACAO MURAL -->
+  <dialog class="mdl-dialog formularios" id="dialog-publicacao">
+
+    <h5 class="mdl-dialog__title titulo text-center" style="margin-bottom: 1.5rem;">Nova Publicação</h5>
+
+    <div class="mdl-dialog__content">
+
+      <fieldset class="form-group">
+        <legend> Titulo da Publicação </legend>
+        <p style="text-align: start;">Insira um titulo que remeta ao que você deseja publicar no mural</p>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="titulo-pub">Escreva aqui</label>
+          <input class="mdl-textfield__input" type="text" id="titulo-pub">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> No que você está pensando? </legend>
+        <p style="text-align: start;">Lembre-se que quaisquer publicações no mural do condomínio devem estar estritamente relacionadas ao cotidiano no condomínio!</p>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="descricao-pub">Escreva aqui</label>
+          <textarea class="mdl-textfield__input" rows="5" type="text" id="descricao-pub"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Imagem </legend>
+        <div>
+          <label id="label-imagem-pub" class="label-inputs" for='imagem-pub'>Escolher Imagem</label>
+          <input type="file" name="arq" id="imagem-pub" value="upload">
+        </div>
+      </fieldset>
+
+      <br>
+
+      <div id="novaImagemMural" class="display-none"></div>
+
+      <p id="semTexto" class="display-none" style="color: red; font-weight: bold;">Escreva algo antes de publicar!</p>
+      <p id="arquivoInvalido" class="display-none" style="color: red; font-weight: bold;">O arquivo selecionado não é uma imagem!</p>
+
+      <!-- /DIALOG CONTENT -->
+
+    </div>
+
+    <div class="mdl-dialog__actions">
+      <button type="button" id="btnPublicar" class="mdl-button display-none">Publicar</button>
+      <!-- MDL Spinner Component with Single Color -->
+      <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active display-none loading-upload"></div>
+      <button type="button" class="mdl-button close">Cancelar</button>
+    </div>
+
+    <!-- /DIALOG ACTIONS -->
+
+  </dialog>
+  <!-- /DIALOG NOVA PUBLICACAO -->
+
+  <!-- DIALOG TROCA IMAGEM PERFIL -->
+  <dialog class="mdl-dialog formularios" id="dialog-troca-imagem">
+
+    <h5 class="mdl-dialog__title titulo text-center" style="margin-bottom: 1.5rem;">Alterar Imagem de Perfil</h5>
+
+    <div class="mdl-dialog__content">
+
+      <fieldset class="form-group">
+        <legend> Nova Imagem </legend>
+        <p>Selecione uma nova foto de perfil</p>
+        <div>
+          <label id="label-imagem-perfil" class="label-inputs" for='imagem-perfil'>Escolher Imagem</label>
+          <input type="file" id="imagem-perfil" value="upload">
+        </div>
+      </fieldset>
+
+      <div id="novaImagemPerfil" class="display-none"></div>
+
+      <p id="sem-imagem" class="display-none" style="color: red; font-weight: bold;">Nenhuma imagem selecionada!</p>
+      <p id="arquivoInvalidoPerfil" class="display-none" style="color: red; font-weight: bold;">Arquivo Inválido!</p>
+
+      <!-- /DIALOG CONTENT -->
+
+    </div>
+
+    <div class="mdl-dialog__actions">
+      <button type="button" id="btnAlterarImagemPerfil" class="mdl-button">Alterar</button>
+      <!-- MDL Spinner Component with Single Color -->
+      <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active display-none loading-upload"></div>
+      <button type="button" class="mdl-button close">Cancelar</button>
+    </div>
+    <!-- /DIALOG ACTIONS -->
+
+  </dialog>
+  <!-- /DIALOG TROCA IMAGEM PERFIL -->
+
+  <!-- DIALOG ALTERAR SENHA -->
+  <dialog class="mdl-dialog formularios" id="dialog-altera-senha">
+
+    <h5 class="mdl-dialog__title titulo text-center" style="margin-bottom: 1.5rem;">Alterar Senha</h5>
+
+    <div class="mdl-dialog__content">
+
+      <fieldset class="form-group">
+        <h6 class="text-center" id="status-redefinicao-senha"></h6>
+      </fieldset>
+
+      <!-- /DIALOG CONTENT -->
+
+    </div>
+
+    <div class="mdl-dialog__actions">
+      <button type="button" id="btnEnviarEmail" class="mdl-button">Enviar</button>
+      <button type="button" class="mdl-button close">Cancelar</button>
+    </div>
+    <!-- /DIALOG ACTIONS -->
+
+  </dialog>
+  <!-- /DIALOG ALTERAR SENHA -->
+
+  <!-- DIALOG NOVO EVENTO -->
+  <dialog class="mdl-dialog formularios" id="dialog-evento">
+
+    <h5 class="mdl-dialog__title titulo text-center">Novo Evento</h5>
+
+    <div class="mdl-dialog__content">
+
+      <fieldset class="form-group">
+        <legend> Nome do evento </legend>
+        <p>Dê um nome sucinto para o evento que estás a marcar</p>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="nome-evento">Ex: Aniversário do vovô</label>
+          <input class="mdl-textfield__input" id="nome-evento" type="text" maxlength="25">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Local </legend>
+        <p>Selecione o local onde será realizado o evento</p>
+        <div>
+          <label class="col-form-label" for="local-evento">Locais</label>
+          <select class="custom-select" id="local-evento">
+             <option selected>Nenhum local selecionado</option>
+             <option value="Salão de Festas">Salão de Festas</option>
+           </select>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Data do evento </legend>
+        <div class="row">
+
+          <div class="col-4">
+            <label for="dia-evento">Dia</label>
+            <input class="form-control" pattern="[0-9]" id="dia-evento" type="number" min="1" max="31" maxlength="2">
+          </div>
+
+          <div class="col-4">
+            <label for="mes-evento">Mês</label>
+            <select class="custom-select col-4" id="mes-evento">
+              <option selected></option>
+              <option value="01">Janeiro</option>
+              <option value="02">Fevereiro</option>
+              <option value="03">Março</option>
+              <option value="04">Abril</option>
+              <option value="05">Maio</option>
+              <option value="06">Junho</option>
+              <option value="07">Julho</option>
+              <option value="08">Agosto</option>
+              <option value="09">Setembro</option>
+              <option value="10">Outubro</option>
+              <option value="11">Novembro</option>
+              <option value="12">Dezembro</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <label for="ano-evento">Ano</label>
+            <select class="custom-select col-4" id="ano-evento">
+              <option selected></option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+            </select>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group" id="tipo-evento-cadastro">
+        <legend> Tipo </legend>
+
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="privado">
+          <input type="radio" id="privado" name="tipoEvento" class="mdl-radio__button" checked>
+          <span class="mdl-radio__label">Privado</span>
+        </label> <br>
+
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="publico">
+          <input type="radio" id="publico" name="tipoEvento" class="mdl-radio__button">
+          <span class="mdl-radio__label">Publico</span>
+        </label>
+
+      </fieldset>
+
+      <p>Clique em "Verificar" para saber se essa data e local estão disponíveis</p>
+      <p id="semDados" class="display-none" style="color: red"><strong>Revise os dados!</strong></p>
+
+      <!-- /DIALOG CONTENT -->
+    </div>
+
+    <div class="mdl-dialog__actions">
+      <button type="button" id="btnVerificarEvento" class="mdl-button">Verificar</button>
+      <button type="button" id="btnMarcarEvento" class="mdl-button display-none">Marcar</button>
+      <button type="button" class="mdl-button close">Cancelar</button>
+    </div>
+    <!-- /DIALOG ACTIONS -->
+
+  </dialog>
+  <!-- /DIALOG NOVO EVENTO -->
+
+  <!-- DIALOG CADASTRAR FUNCIONARIO -->
+  <dialog class="mdl-dialog formularios" id="dialog-cadastra-funcionario">
+
+    <h5 class="mdl-dialog__title titulo text-center" style="margin-bottom: 1.5rem;">
+      Novo Funcionário
+    </h5>
+
+    <div class="mdl-dialog__content">
+
+      <fieldset class="form-group">
+        <legend> Nome </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="nome-funcionario">Primeiro Nome</label>
+          <input class="mdl-textfield__input" id="nome-funcionario" type="text" maxlength="35">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend>Sobrenome </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="sobrenome-funcionario">Sobrenome</label>
+          <input class="mdl-textfield__input" id="sobrenome-funcionario" type="text" maxlength="35">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend>Sexo </legend>
+
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="masculino">
+          <input type="radio" id="masculino" class="mdl-radio__button" name="sexo" value="masc" checked>
+          <span class="mdl-radio__label">Masculino</span>
+        </label> <br>
+
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="feminino">
+          <input type="radio" id="feminino" class="mdl-radio__button" name="sexo" value="fem">
+          <span class="mdl-radio__label">Feminino</span>
+        </label>
+
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend>Cargo </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="cargo-funcionario">Cargo do Funcionario</label>
+          <input class="mdl-textfield__input" id="cargo-funcionario" type="text" maxlength="35">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend>Celular </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="celular-funcionario">Celular</label>
+          <input class="mdl-textfield__input" id="celular-funcionario" type="text" onkeypress="formatar('## #####-####', this)" maxlength="13">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Telefone </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="telefone-funcionario">Telefone</label>
+          <input class="mdl-textfield__input" id="telefone-funcionario" type="text" onkeypress="formatar('## ####-####', this)" maxlength="12">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Email </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="email-funcionario">Email do Funcionario</label>
+          <input class="mdl-textfield__input" id="email-funcionario" type="email" maxlength="35">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Senha </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="senha-funcionario">min: 6 caracteres</label>
+          <input class="mdl-textfield__input" id="senha-funcionario" type="password" minlength="6" maxlength="35">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend> Confirmar Senha </legend>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="senha-funcionario">Digite a Senha Novamente</label>
+          <input class="mdl-textfield__input" id="confirma-senha-funcionario" type="password" minlength="6" maxlength="35">
+        </div>
+      </fieldset>
+
+      <p id="senhas-diferentes" class="display-none p-errors">
+        As senhas não batem! Digite novamente.
+      </p>
+
+      <p>
+        Aviso! <br> Quando você cadastrar esse funcionário você será redirecionado para a página de login e terá de entrar com sua conta novamente! <br> Pedimos desculpas pelo incômodo
+      </p>
+
+      <!-- /DIALOG CONTENT -->
+
+    </div>
+
+    <div class="mdl-dialog__actions">
+      <button type="button" id="btnCadastrarFuncionario" class="mdl-button">Cadastrar</button>
+      <button type="button" class="mdl-button close">Cancelar</button>
+    </div>
+    <!-- /DIALOG ACTIONS -->
+
+  </dialog>
+  <!-- /DIALOG CADASTRAR FUNCIONARIO -->
+
+  <!-- SCRIPTS -->
+  <script src="../js/jquery-3.2.1.min.js"></script>
+  <script src="../js/tether.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/app.js"></script>
+
+  <!-- API Load Image -->
+  <script src="../js/load-image.all.min.js"></script>
+
+  <script>
+    var $doc = $('.mdl-layout__content');
+    $('.smooth').click(function() {
+      $doc.animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+      }, 500);
+      return false;
+    });
+    $('.drawer-topo').click(function() {
+      $doc.animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+      }, 500);
+      return false;
+    });
+    $doc.on("scroll", function(){
+      if( $doc.scrollTop() > 300 ) {
+        $('.smooth').removeClass('display-none-important');
+      } else {
+        $('.smooth').addClass('display-none-important');
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+<!-- FIM -->

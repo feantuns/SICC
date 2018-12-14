@@ -1,0 +1,50 @@
+/* login */
+body {
+  background-color: #003d33;
+  overflow: hidden;
+}
+.suporta-form {
+  display: flex;
+  justify-content: center;
+}
+.form {
+  background-color: #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+  padding: 2rem;
+  border-radius: 1rem;
+  top: 20%;
+  color: #8b8987 !important;
+}
+.form h4 {
+  margin: 2rem 0;
+}
+.form a {
+  color: #8b8987 !important;
+}
+.form a:hover {
+  text-decoration: none;
+}
+.form .logo {
+  margin-top: -2rem;
+}
+.form .form-control {
+  margin-bottom: .5rem;
+  border-radius: .5rem;
+}
+.btn {
+  cursor: pointer;
+}
+.btn-login {
+  color: #8b8987;
+}
+
+button#btnTrocaSenha {
+  margin-top: 16px;
+}
+
+/*media queries*/
+@media (max-width: 600px) {
+  .form {
+  top: 8%;
+  }
+}

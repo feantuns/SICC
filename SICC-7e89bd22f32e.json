@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "projetosiccbrasil",
+  "private_key_id": "7e89bd22f32eb1e714db5293e7cc5e658fb56e00",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/gLIPzj7SSCP1\nXtNqp7U2O0vGKNcD8NPZ0DMmoR2YcZ4+yomZPE8oaNOMZhRatNCvSz5Z1bpJV1tK\nw7S70Abl53yu+9o8DWddByGf8tU5vnt2BP/qyLDr1wscUJyS+5UhZ/20AkQvvtaz\nVAPchQ2MHU2zFxex21BIdThmPQiQGxuz6Ox+6cmYMONELCQfVn7TmVDExTchdZyu\n5o/UlL+YFICma3IVkHvZtmxV1HDIuCV1F8KiTOcGKpU+S03G8kZH+9kZ+Py3m7Ji\nYg22BrHIDCsvC0P87v/6gaA8xw9gEwHRjfbz0WzCVwobx94byJyU5uJDr1q6G5qJ\nCJjY5JvTAgMBAAECggEANydeoTS6XR/P02xzIWWZyDu9sB21B3qF2VagVMDUYEJg\n3B7DEHIRLkc6nlYMCK/I5qOaGo92robNUTQaSnk4c2B/RXpduSv3GBDku0dZ596X\nej8oYbtZUSNHHOmOnrp8kfl8VSrN7p5dAZrx3cIoS7Fo3mqJNX0/mw6/pppva+kT\nKctFWOGuuu3NWK9HQ6BzFyNm2p6yIC+wDn+AmHegG27XQV21s2tPlMP9QUfZamdR\nRaQUQPSSsqKQX68qHr+7+W6omLrOosxZzJy9RPpve0PA4CsMTdmgMDnBsBHVklv8\netkTz1gz7MeDfskVYW72VD3RGq8qX4codHxXy9l1MQKBgQDlzawHDWmwnGl8C+Cc\njoBla9VfKqRxfYepMqUOmwyOsDWDq9ZS9cnQ+g1hCd/5pAo3+E+Zi4BoZ8VueiHh\n+cP8JJefbW9evbsYQOh3vs6wHl+Q1bE98Rf/YNM/NDImrhtRN582zfGiCAfVsh+I\n1RbzqsYyGCZnTaMCVBGNalwA2wKBgQDVVUx27kBsy0VN0tKJFgqlU3EFLE04nWGS\nWGNQ3BuO0IespJSebIPNY+eRojorWaxfUk/HCtM5/NELVrOoL0wCe61wAHIifbj9\ngblAcRlgDRnLyXM+hgrrsDW886WjDAgCGmSaduYbyyYJnh/myR+2aCp2W639i7n0\nWDe/3sNmaQKBgEad5C4qnf7KodOfpr8VPzlrYJ8k8HF7nLOOv4/0b3Btj5RNuse1\nhfX00SWvrib9lLJMWNGbP7NVqCLh3wWdBe+2ou036NBZR2QVlhouBT+zpbRRJm0d\naD1u2JuEg6DFQdm8WO2zbXxYMWgmm3Al4y6vnMYKC8sU3XG6ucYWF/2fAoGBAMip\nLv8/IwIyQMHu53FidikDz28aOJhkEH7i/Kf2IUW4B6XwOIq7b04mBo8JlMVp16Th\ne4CxQfVtRAPyTZKIymobgwuyn6ipsPNiralbuI6MRBNXLTtGQcdnO2S7mLVAf9fa\nk35nEBJchy7MuR0PWPDuEeK6YXH3l7WptOaY1hrhAoGBAJ33TTjie8t+l4C+vMa+\n274WlYpkRmnt/Q45mHHKE5yCR6phkgZqP/Sj77WdIEK8GQ2PbiTh2KbV09Spajef\n1ytS1CPuZyjVhcmRxW5l0ecRXwrk34361TXpitDlju0r/ZB3h2Ic7WkP/YVu79ld\n5BX8N/ZOXN0LU9l08+hDF+9s\n-----END PRIVATE KEY-----\n",
+  "client_email": "projetosiccbrasil@appspot.gserviceaccount.com",
+  "client_id": "109442912809407997968",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/projetosiccbrasil%40appspot.gserviceaccount.com"
+}
